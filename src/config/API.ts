@@ -1,8 +1,9 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import { ENVIRONMENT } from "./environment";
 
 export const API = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: ENVIRONMENT.API_URL,
 });
 
 API.interceptors.request.use((config) => {

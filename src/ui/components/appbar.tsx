@@ -1,22 +1,33 @@
-import { ReactNode} from "react";
+import { ReactNode, useEffect } from "react";
 import { Link } from "react-router";
 import { useAuth } from "../../service/auth/use-auth";
 import { useUserStore } from "../../store/user/use-user-store";
+import Cookies from "js-cookie";
+import { DiscordIcon } from "../icons/discord-icon";
+import { ENVIRONMENT } from "../../config/environment";
 
 export function AppBar({ children }: Readonly<{ children: ReactNode }>) {
   const { signOut } = useAuth();
   const {
     user: { username, avatarUrl },
+    setUser,
   } = useUserStore();
 
   function authWithDiscord() {
-    window.location.href =
-      "https://discord.com/oauth2/authorize?client_id=1346994909596356811&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3553%2Fdiscord%2Fcallback&scope=email+identify";
+    window.location.href = `https://discord.com/oauth2/authorize?client_id=${ENVIRONMENT.DISCORD_OAUTH_ID}&response_type=code&redirect_uri=${ENVIRONMENT.DISCORD_OAUTH_REDIRECT_URL}&scope=email+identify`;
   }
+
+  useEffect(() => {
+    setUser({
+      username: Cookies.get("username") ?? "",
+      email: Cookies.get("email") ?? "",
+      avatarUrl: Cookies.get("avatarUrl") ?? "",
+    });
+  }, []);
 
   return (
     <>
-      <div className="py-2 px-32 w-full fixed top-0 flex justify-between bg-base-200 items-center">
+      <div className="py-2 px-32 w-full fixed top-0 flex justify-between bg-black items-center text-white z-10">
         <Link to={"/"} className="text-bold text-lg cursor-pointer">
           BracketMaster
         </Link>
@@ -30,17 +41,24 @@ export function AppBar({ children }: Readonly<{ children: ReactNode }>) {
             </div>
             {username}
 
-            <button onClick={signOut} className="btn btn-ghost">
+            <button
+              onClick={signOut}
+              className="text-white hover:underline cursor-pointer ml-8"
+            >
               Sair
             </button>
           </div>
         ) : (
-          <button onClick={authWithDiscord} className="btn btn-neutral">
+          <button
+            onClick={authWithDiscord}
+            className="btn btn-neutral bg-[#717AF7] hover:bg-[#5964ff] flex gap-2 items-center "
+          >
             Entrar pelo Discord
+            <DiscordIcon />
           </button>
         )}
       </div>
-      <div className="mt-20 px-32 h-full w-full">{children}</div>
+      <div className="pt-20 px-32 h-screen w-full bg-base-200">{children}</div>
     </>
   );
 }

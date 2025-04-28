@@ -1,0 +1,5 @@
+export const ENVIRONMENT = {
+  API_URL: import.meta.env.VITE_BASE_URL,
+  DISCORD_OAUTH_ID: import.meta.env.VITE_DISCORD_OAUTH_ID,
+  DISCORD_OAUTH_REDIRECT_URL: import.meta.env.VITE_DISCORD_OAUTH_REDIRECT_URL,
+};

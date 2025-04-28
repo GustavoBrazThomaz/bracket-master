@@ -1,8 +1,24 @@
+import { Outlet } from "react-router";
+import { AppBar } from "./ui/components/appbar";
+import { useEffect } from "react";
+import { useUserStore } from "./store/user/use-user-store";
+import Cookies from "js-cookie";
+
 function App() {
+  const { setUser } = useUserStore();
+
+  useEffect(() => {
+    setUser({
+      username: Cookies.get("username") ?? "",
+      email: Cookies.get("email") ?? "",
+      avatarUrl: Cookies.get("avatarUrl") ?? "",
+    });
+  }, []);
+
   return (
-    <div className="p-16">
-      <button className="btn btn-neutral">Neutral</button>
-    </div>
+    <AppBar>
+      <Outlet />
+    </AppBar>
   );
 }
 

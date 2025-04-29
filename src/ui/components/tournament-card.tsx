@@ -1,11 +1,14 @@
 import { User, UserLock, Users } from "lucide-react";
 import { Tournament } from "../../service/tournaments/types";
+import { useNavigate } from "react-router";
 
 export default function TournamentCard({
   tournament,
 }: Readonly<{ tournament: Tournament }>) {
+  const navigate = useNavigate();
+
   const {
-    // id,
+    id,
     name,
     participants,
     registrationLimit,
@@ -13,6 +16,7 @@ export default function TournamentCard({
     isIndividual,
     teamSize,
   } = tournament;
+
   return (
     <div className="card w-96 bg-base-100 card-md shadow-sm relative">
       {!isOpen && (
@@ -54,7 +58,12 @@ export default function TournamentCard({
         </div>
 
         <div className="justify-end card-actions">
-          <button className="btn btn-primary">Ver detalhes</button>
+          <button
+            onClick={() => navigate(`/tournament/${id}`)}
+            className="btn btn-primary"
+          >
+            Ver detalhes
+          </button>
         </div>
       </div>
     </div>

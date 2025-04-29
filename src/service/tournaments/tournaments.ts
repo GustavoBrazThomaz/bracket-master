@@ -1,6 +1,6 @@
 import { API } from "../../config/API";
 import { PaginationInput } from "../../types/pagination";
-import { TournamentResponse } from "./types";
+import { Tournament, TournamentResponse } from "./types";
 
 export async function getTournaments({
   page,
@@ -10,5 +10,14 @@ export async function getTournaments({
   const { data } = await API.get(
     `/tournaments?page=${page}&size=${size}&sort=${sort}`
   );
+  return data;
+}
+
+export async function getTournamentById({
+  id,
+}: {
+  id: string;
+}): Promise<Tournament> {
+  const { data } = await API.get(`/tournaments/${id}`);
   return data;
 }

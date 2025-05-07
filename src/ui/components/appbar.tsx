@@ -58,7 +58,7 @@ export function AppBar({ children }: Readonly<{ children: ReactNode }>) {
           </button>
         )}
       </div>
-      <div className="pt-20 px-32 h-screen w-full bg-base-200">{children}</div>
+      <div className="pt-20 px-32 w-full ">{children}</div>
     </>
   );
 }

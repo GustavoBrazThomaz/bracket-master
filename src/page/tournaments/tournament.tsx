@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import { useGetTournamentById } from "../../service/tournaments/use-get-tournament-by-id";
 import { TournamentDescription } from "./tabs/description";
 import { TournamentParticipants } from "./tabs/participants";
-import { Brackets } from "./tabs/brackets";
+import { Brackets } from "./tabs/brackets/brackets";
 
 interface Tab {
   title: string;
@@ -30,31 +30,33 @@ export function TournamentPage() {
     },
     {
       title: "Chaves",
-      component: <Brackets />,
+      component: <Brackets id={tournamentId} />,
     },
   ];
 
   return (
-    <div className="w-full flex justify-center">
-      <div className="w-full flex flex-col justify-center items-center space-y-8 max-w-3xl">
-        <div
-          role="tablist"
-          className="tabs tabs-border w-full  flex justify-center"
-        >
-          {tabs.map((tab, index) => (
-            <a
-              onClick={() => setSelectTab(index)}
-              role="tab"
-              key={`tab_${tab.title}`}
-              className={`tab ${index === selectTab && "tab-active"}`}
-            >
-              {tab.title}
-            </a>
-          ))}
+    <>
+      <div className="w-full flex justify-center">
+        <div className="w-full flex flex-col justify-center items-center space-y-8 max-w-3xl">
+          <div
+            role="tablist"
+            className="tabs tabs-border w-full  flex justify-center"
+          >
+            {tabs.map((tab, index) => (
+              <a
+                onClick={() => setSelectTab(index)}
+                role="tab"
+                key={`tab_${tab.title}`}
+                className={`tab ${index === selectTab && "tab-active"}`}
+              >
+                {tab.title}
+              </a>
+            ))}
+          </div>
         </div>
-
-        {tabs[selectTab].component}
       </div>
-    </div>
+
+      {tabs[selectTab].component}
+    </>
   );
 }

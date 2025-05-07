@@ -1,3 +1,4 @@
+import { MatchType } from "@replydev/react-tournament-brackets";
 import { API } from "../../config/API";
 import { PaginationInput } from "../../types/pagination";
 import { TournamentFormSchema } from "../../ui/forms/tournament-form/tournament-form.validator";
@@ -44,7 +45,15 @@ export async function postParticipantInToTournament(tournamentId: string) {
 
 export async function postGenerateBracket(tournamentId: string) {
   const { data } = await API.post(
-    `/tournaments/${tournamentId}/generate-bracket`
+    `/tournaments/${tournamentId}/generate-brackets`
   );
+  return data;
+}
+
+export async function getTournamentBracket(
+  tournamentId: string
+): Promise<MatchType[]> {
+  const { data } = await API.get(`/tournaments/${tournamentId}/brackets`);
+
   return data;
 }

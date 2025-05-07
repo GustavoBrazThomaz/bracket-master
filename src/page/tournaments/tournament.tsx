@@ -1,63 +1,59 @@
+import { ReactNode, useState } from "react";
 import { useParams } from "react-router";
 import { useGetTournamentById } from "../../service/tournaments/use-get-tournament-by-id";
-import dayjs from "dayjs";
-import { User, Users } from "lucide-react";
-import { hasDatePassed } from "../../utils/hasDatePassed";
+import { TournamentDescription } from "./tabs/description";
+import { TournamentParticipants } from "./tabs/participants";
+import { Brackets } from "./tabs/brackets";
+
+interface Tab {
+  title: string;
+  component: ReactNode;
+}
 
 export function TournamentPage() {
   const { id } = useParams();
-  const { data, isLoading } = useGetTournamentById(id ?? "");
+  const tournamentId = id ?? "";
+  const { data, isLoading } = useGetTournamentById(tournamentId);
+  const [selectTab, setSelectTab] = useState<number>(0);
 
   if (isLoading) return <p>Loading...</p>;
   if (!data) return <p>Error</p>;
 
-  return (
-    <div className="  w-full flex justify-center ">
-      <div className="flex justify-center flex-col w-full max-w-3xl">
-        <div className="flex justify-between">
-          <div>
-            <p className="text-xl font-bold">{data.name}</p>
-            <p>{data.description}</p>
-          </div>
+  const tabs: Tab[] = [
+    {
+      title: "Descrição",
+      component: <TournamentDescription tournament={data} />,
+    },
+    {
+      title: "Participantes",
+      component: <TournamentParticipants id={tournamentId} />,
+    },
+    {
+      title: "Chaves",
+      component: <Brackets />,
+    },
+  ];
 
-          <button
-            disabled={!data.isOpen || hasDatePassed(data?.date ?? new Date())}
-            className="btn btn-neutral"
-          >
-            Entrar no torneio
-          </button>
+  return (
+    <div className="w-full flex justify-center">
+      <div className="w-full flex flex-col justify-center items-center space-y-8 max-w-3xl">
+        <div
+          role="tablist"
+          className="tabs tabs-border w-full  flex justify-center"
+        >
+          {tabs.map((tab, index) => (
+            <a
+              onClick={() => setSelectTab(index)}
+              role="tab"
+              key={`tab_${tab.title}`}
+              className={`tab ${index === selectTab && "tab-active"}`}
+            >
+              {tab.title}
+            </a>
+          ))}
         </div>
 
-        <p className="text-lg font-bold mt-4">Modalidade</p>
-        <p>{data.modality}</p>
-        <p className="text-lg font-bold mt-4">Participantes</p>
-        <p>
-          {data.participants ?? 0}/{data.registrationLimit}
-        </p>
-        <p className="text-lg font-bold mt-4">Tamanho da equipe</p>
-        <p>
-          {data.isIndividual ? (
-            <div className="tooltip" data-tip="Individual">
-              <p className="flex">
-                <User /> 1
-              </p>
-            </div>
-          ) : (
-            <div className="tooltip" data-tip="Membros por time">
-              <p className="flex">
-                <Users /> {data.teamSize}
-              </p>
-            </div>
-          )}
-        </p>
-        <p className="text-lg font-bold mt-3">Data</p>
-        <p>{dayjs(data?.date).format("DD/MM/YYYY")}</p>
-
-        <p className="text-lg font-bold mt-4">Prêmio</p>
-        <p className="text-bold">{data.prizePool}</p>
-
-        <p className="text-lg font-bold mt-4">Regras</p>
-        <p>{data.rules}</p>
+        {tabs[selectTab].component}
       </div>
     </div>
   );

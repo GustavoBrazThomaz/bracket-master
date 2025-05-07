@@ -10,6 +10,7 @@ export default function TournamentsPage() {
     sort: "id,asc",
   });
 
+
   if (isLoading && isPending) return <p>Loading...</p>;
 
   return (

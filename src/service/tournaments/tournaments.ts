@@ -23,7 +23,28 @@ export async function getTournamentById({
   return data;
 }
 
+export async function getTournamentParticipants(
+  tournamentId: string
+): Promise<{ name: string }[]> {
+  const { data } = await API.get(`/tournaments/${tournamentId}/participants`);
+  return data.content;
+}
+
 export async function postNewTournament(form: TournamentFormSchema) {
   const { data } = await API.post("/tournaments", form);
+  return data;
+}
+
+export async function postParticipantInToTournament(tournamentId: string) {
+  const { data } = await API.post(`/tournaments/${tournamentId}/register`, {
+    type: "USER",
+  });
+  return data;
+}
+
+export async function postGenerateBracket(tournamentId: string) {
+  const { data } = await API.post(
+    `/tournaments/${tournamentId}/generate-bracket`
+  );
   return data;
 }

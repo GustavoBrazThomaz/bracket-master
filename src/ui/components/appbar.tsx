@@ -27,7 +27,7 @@ export function AppBar({ children }: Readonly<{ children: ReactNode }>) {
 
   return (
     <>
-      <div className="py-2 px-32 w-full fixed top-0 flex justify-between bg-black items-center text-white z-10">
+      <div className="py-4 px-32 w-full fixed top-0 flex justify-between bg-black items-center text-white z-10">
         <Link to={"/"} className="text-bold text-lg cursor-pointer">
           BracketMaster
         </Link>
@@ -58,7 +58,7 @@ export function AppBar({ children }: Readonly<{ children: ReactNode }>) {
           </button>
         )}
       </div>
-      <div className="pt-20 px-32 w-full ">{children}</div>
+      {children}
     </>
   );
 }

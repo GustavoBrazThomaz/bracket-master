@@ -33,7 +33,7 @@ export function HeroBanner() {
               <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-indigo-500 rounded-full opacity-30"></div>
               <div className="bg-white p-2 rounded-lg shadow-xl rotate-3">
                 <img
-                  src="https://files.oaiusercontent.com/file-6XPte8H4Xj7ZXyLJxPmWBb?se=2025-05-13T15%3A42%3A04Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D61fc71b1-fba8-4998-bc79-4ca755460185.webp&sig=tU1NtKDeN98lUncNMKRS%2BCWooNvu/NfIa1fhbGssNLc%3D"
+                  src="https://images.pexels.com/photos/7267591/pexels-photo-7267591.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                   alt="Campeonato em ação"
                   className="rounded w-full h-auto pointer-events-none"
                 />

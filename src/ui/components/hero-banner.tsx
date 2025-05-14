@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router";
+
 export function HeroBanner() {
+  const navigate = useNavigate();
+
   return (
     <section className="bg-gradient-to-r from-purple-700 to-indigo-900 text-white py-16 h-dvh flex items-center">
       <div className="container mx-auto px-4">
@@ -12,10 +16,13 @@ export function HeroBanner() {
               modalidades.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="btn bg-white text-purple-900 hover:bg-purple-100">
+              {/* <button className="btn bg-white text-purple-900 hover:bg-purple-100">
                 Criar Conta
-              </button>
-              <button className="btn bg-purple-600 text-white hover:bg-purple-700">
+              </button> */}
+              <button
+                onClick={() => navigate("/tournaments")}
+                className="btn bg-purple-600 text-white hover:bg-purple-700"
+              >
                 Explorar Campeonatos
               </button>
             </div>
@@ -28,7 +35,7 @@ export function HeroBanner() {
                 <img
                   src="https://files.oaiusercontent.com/file-6XPte8H4Xj7ZXyLJxPmWBb?se=2025-05-13T15%3A42%3A04Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D61fc71b1-fba8-4998-bc79-4ca755460185.webp&sig=tU1NtKDeN98lUncNMKRS%2BCWooNvu/NfIa1fhbGssNLc%3D"
                   alt="Campeonato em ação"
-                  className="rounded w-full h-auto"
+                  className="rounded w-full h-auto pointer-events-none"
                 />
               </div>
             </div>

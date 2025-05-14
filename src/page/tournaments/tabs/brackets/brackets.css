@@ -83,6 +83,8 @@
   border-right-width: 1px !important;
 }
 
+/* Round title */
 .sc-gtLWhw {
-  fill: #000;
+  fill: #812DD9;
+  border-radius: 1rem;
 }

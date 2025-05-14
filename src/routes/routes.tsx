@@ -4,6 +4,7 @@ import { AppBar } from "../ui/components/appbar";
 import { DiscordAuth } from "../page/auth/discord-auth";
 import { TournamentPage } from "../page/tournaments/tournament";
 import { Home } from "../page/home/home";
+import TournamentsPage from "../page/tournaments/tournaments";
 
 export const routes = createBrowserRouter([
   {
@@ -11,6 +12,10 @@ export const routes = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, Component: Home },
+      {
+        path: "tournaments",
+        Component: TournamentsPage,
+      },
       {
         path: "discord/callback",
         Component: DiscordAuth,

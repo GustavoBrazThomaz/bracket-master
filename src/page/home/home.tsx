@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { useGetTournaments } from "../../service/tournaments/use-get-tournaments";
 import { HeroBanner } from "../../ui/components/hero-banner";
 import { HowWork } from "../../ui/components/how-work";
@@ -38,7 +39,9 @@ export function Home() {
         <div className="w-full py-8 container">
           <div className="w-full flex justify-between">
             <p className="text-2xl font-bold">Campeonatos em Destaque</p>
-            <button className="btn btn-link">Ver todos</button>
+            <Link to="/tournaments" className="btn btn-link">
+              Ver todos
+            </Link>
           </div>
         </div>
 
@@ -75,7 +78,7 @@ export function Home() {
         </p>
 
         <div className="flex gap-4">
-          <button className="btn">Criar conta</button>
+          {/* <button className="btn">Criar conta</button> */}
           <button className="btn bg-purple-700 text-white">Saiba mais</button>
         </div>
       </div>

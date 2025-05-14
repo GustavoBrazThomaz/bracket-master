@@ -7,19 +7,22 @@ export function Brackets({ id }: { id: string }) {
   const { data, isLoading } = useGetTournamentBrackets(id);
 
   if (isLoading) return <p>Loading...</p>;
-  if (!data) return <p>error</p>;
 
   return (
     <div className="w-full space-y-4">
-      <div className="flex w-full justify-end">
-        <button
-          onClick={() => generateBracket.mutate(id)}
-          className="btn btn-neutral"
-        >
-          Criar Bracket
-        </button>
-      </div>
-      <BracketContainer matches={data} />
+      {data ? (
+        <BracketContainer matches={data} />
+      ) : (
+        <div className="w-full h-full rounded-lg justify-center items-center flex-col flex py-16 gap-4">
+          <p className="text-2xl font-semibold">As chaves ainda não foram criadas</p>
+          <button
+            onClick={() => generateBracket.mutate(id)}
+            className="btn  bg-purple-600 text-white hover:bg-purple-700"
+          >
+            Criar Bracket
+          </button>
+        </div>
+      )}
     </div>
   );
 }

@@ -27,7 +27,7 @@ export const BracketContainer = ({ matches }: { matches: MatchType[] }) => {
   });
 
   return (
-    <div className="  h-full overflow-auto ">
+    <div className="h-full overflow-auto border border-base-300 p-4 rounded-lg">
       <SingleEliminationBracket
         matches={matches}
         matchComponent={Match}
